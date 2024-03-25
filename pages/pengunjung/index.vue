@@ -1,4 +1,5 @@
 <template>
+<div class="content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12">
@@ -12,7 +13,7 @@
             <tr>
               <td>#</td>
               <td>NAMA</td>
-              <td>KEANGGOTAAN</td>
+              <td>KATEGORI</td>
               <td>WAKTU</td>
               <td>KEPERLUAN</td>
             </tr>
@@ -31,8 +32,24 @@
     </div>
   </div>
   <!-- <button type="submit" class="btn btn-dark btn-lg rounded-5 px-5">Mencari Buku</button> -->
-  <nuxt-link to="/buku" class="btn btn-dark btn-lg rounded-5 px-5">Mencari Buku</nuxt-link>
+  <nuxt-link to="/buku" class="btn btn-dark btn-lg rounded-5 px-5 mx-2">Mencari Buku</nuxt-link>
 
   <!-- <button type="submit" class="btn btn-dark btn-lg rounded-5 px-5">Selesai</button> -->
   <nuxt-link to="/" class="btn btn-dark btn-lg rounded-5 px-5">Selesai</nuxt-link>
+</div>
 </template>
+
+<style scoped>
+.content {
+  background-image: url('@/assets/home.png');
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+.btn{
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  float :right;
+}
+</style>
