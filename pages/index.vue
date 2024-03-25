@@ -72,13 +72,13 @@
 
 <style scoped>
 .intro{
-  height: 600px;
+  height: 100vh;
 }
 .text-center{
   padding-top: 5%;
-  font-family: "League Spartan", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
   font-size: 190%;
-  color: white;
+  color: rgb(255, 255, 255);
   text-align: center;
 }
 
