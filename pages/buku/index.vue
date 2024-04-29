@@ -13,6 +13,7 @@
               <div class="card mb-3">
                 <div class="card-body">
                   <img src="~/assets/CoverDilan.jpg" class="cover" alt="cover1">
+                  <NuxtLink to="/buku/rincian"><button type="button" class="btn btn-primary">lihat rincian</button></NuxtLink>
                 </div>
               </div>
             </div>
@@ -42,6 +43,13 @@
 
 
 <style scoped>
+.content {
+  background-image: url('@/assets/bg-home-cari-buku.jpg');
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+
 .card-body {
   width: 100%;
   height: 100%;
