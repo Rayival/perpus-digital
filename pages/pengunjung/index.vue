@@ -8,7 +8,7 @@
           <input type="search" class="form-control form-control-lg rounded-5" placeholder="Filter...">
         </div>
         <div class="my-3 text-muted">menampilkan 1 dari 1</div>
-        <table class="table">
+        <table class="table table-bordered border-dark">
           <thead>
             <tr>
               <td>#</td>
