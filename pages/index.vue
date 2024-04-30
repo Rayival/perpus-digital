@@ -21,7 +21,7 @@
                   </div>
                 </div>
                   <div class="row m-3 justify-content-center">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 pb-2">
                               <select class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
                                   <option value="">Tingkatan</option>
                                   <option value="X">X</option>
@@ -29,7 +29,7 @@
                                   <option value="XII">XII</option>
                               </select>
                           </div>
-                          <div class="col-sm-4 justify-content-center">
+                          <div class="col-sm-4 justify-content-center pb-2">
                               <select class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
                                   <option value="">Jurusan</option>
                                   <option value="TJKT">TJKT</option>
@@ -84,7 +84,7 @@
 
 .btn{
   background-color: white;
-  width: 15%;
+
   box-shadow: 2px 2px 2px #424242;
   color: black;
   
