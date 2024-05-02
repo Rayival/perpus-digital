@@ -7,13 +7,27 @@
           <div class="my-3">
             <input type="search" class="form-control rounded-5" placeholder="Mau baca apa hari ini?">
           </div>
+          <div class="col-2 text-end " style="color: white;">
+                    <p class="m-0 pt-2">Kategori :</p>
+                </div>
+                <div class="col-2 ps-0">
+                    <select name="kategori" id="kategori" class="form-control form-control-sm rounded-5 form-select">
+                        <option value="" disabled selected>  </option>
+                        <option value="">Novel</option>
+                        <option value="">Pengetahuan Umum</option>
+                        <option value="">Bahasa</option>
+                        <option value="">Pengetahuan</option>
+                        <option value="">Cerita</option>
+                        <option value="">Pendidikan</option>
+                    </select>
+          </div>
           <div class="my-3 text-muted">menampilkan 3 dari 3</div>
           <div class="row">
             <div class="col-lg-2">
               <div class="card mb-3">
                 <div class="card-body">
                   <img src="~/assets/CoverDilan.jpg" class="cover" alt="cover1">
-                  <NuxtLink to="/buku/rincian"><button type="button" class="btn btn-primary">lihat rincian</button></NuxtLink>
+                  <NuxtLink to="/buku/rincian"><button type="button" class="cover mt-3 btn btn-primary">lihat rincian</button></NuxtLink>
                 </div>
               </div>
             </div>
@@ -21,6 +35,7 @@
               <div class="card mb-3">
                 <div class="card-body">
                   <img src="~/assets/CoverMilea.jpg" class="cover" alt="cover2">
+                  <NuxtLink to="/buku/rincian"><button type="button" class="cover mt-3 btn btn-primary">lihat rincian</button></NuxtLink>
                 </div>
               </div>
             </div>
@@ -28,6 +43,7 @@
               <div class="card mb-3">
                 <div class="card-body">
                   <img src="~/assets/CoverAncika.jpg" class="cover" alt="cover3">
+                  <NuxtLink to="/buku/rincian"><button type="button" class="cover mt-3 btn btn-primary">lihat rincian</button></NuxtLink>
                 </div>
               </div>
             </div>
