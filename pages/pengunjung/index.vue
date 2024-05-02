@@ -5,9 +5,8 @@
       <div class="col-lg-12">
         <h2 class="text-center my-4">RIWAYAT KUNJUNGAN</h2>
         <div class="my-3">
-          <input type="search" class="form-control form-control-lg rounded-5" placeholder="Filter...">
         </div>
-        <div class="my-3 text-muted">menampilkan 1 dari 1</div>
+        <div class="my-3 text-muted">menampilkan 1 dari </div>
         <table class="table table-bordered border-dark">
           <thead>
             <tr>
@@ -45,11 +44,13 @@
   background-size: cover;
   height: 100vh;
   width: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color:rgb(255, 255, 255);
 }
 .btn{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: sans Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   background-color: rgb(255, 255, 255);
-  color: black;
+  color: rgb(0, 0, 0);
   float :right;
 }
-</style>
+</style> 
