@@ -1,16 +1,16 @@
 <template>
   <div class="intro" style="background-color:#23323D">
       <div class="text-center">
-          <h2>Isi kunjungan</h2>
+          <h2>ISI BUKU</h2>
           <div class="container-fluid">
             <form class="py-3 m-5">
               <div class="row m-3 d-flex justify-content-center">
-                <div class="col-sm-10">
+                <div class="col-sm-7">
                       <input type="text" style="box-shadow: 2px 2px 2px #424242;" class="form-control" placeholder="Nama ..." aria-label="Nama ..." />
                     </div>
                   </div>
                 <div class="row m-3 justify-content-center">
-                  <div class="col-sm-10">
+                  <div class="col-sm-7">
                       <select class="form-control form-control-lg form-select" style="box-shadow: 2px 2px 2px #424242;">
                         <option value="">Kategori ...</option>
                         <option>Siswa</option>
@@ -21,7 +21,7 @@
                   </div>
                 </div>
                   <div class="row m-3 justify-content-center">
-                    <div class="col-sm-3 pb-2">
+                    <div class="col-sm-2 pb-2">
                               <select class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
                                   <option value="">Tingkatan</option>
                                   <option value="X">X</option>
@@ -29,7 +29,7 @@
                                   <option value="XII">XII</option>
                               </select>
                           </div>
-                          <div class="col-sm-4 justify-content-center pb-2">
+                          <div class="col-sm-3 justify-content-center pb-2">
                               <select class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
                                   <option value="">Jurusan</option>
                                   <option value="TJKT">TJKT</option>
@@ -39,7 +39,7 @@
                                   <option value="TOI">TOI</option>
                               </select>
                           </div>
-                          <div class="col-sm-3 justify-content-center">
+                          <div class="col-sm-2 justify-content-center">
                               <select class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
                                   <option value="">Kelas</option>
                                   <option value="1">1</option>
@@ -50,7 +50,7 @@
                           </div>
                       </div>
                       <div class="row m-3 justify-content-center">
-                          <div class="col-sm-10">
+                          <div class="col-sm-7">
                               <select class="form-control mb-3" style="box-shadow: 2px 2px 2px #424242;">
                                   <option value="">Keperluan ...</option>
                                   <option>Membaca</option>
@@ -61,7 +61,7 @@
                           </div>
                       </div>
                       <NuxtLink to="/pengunjung">
-                          <input type="submit" class="btn" value="Kirim">
+                          <input type="submit" class="btn btn-dark btn-lg rounded-5 px-5" value="Kirim">
                       </NuxtLink>
                   </form>
               
