@@ -7,7 +7,7 @@
         <div class="my-3">
         </div>
         <div class="my-3 text-muted">menampilkan 1 dari </div>
-        <table class="table table-bordered border-dark">
+        <table class="table table-bordered border-dark text-white ">
           <thead>
             <tr>
               <td>#</td>
@@ -52,5 +52,9 @@
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
   float :right;
+}
+
+thead, tbody, td{
+  border: 2px solid black;
 }
 </style> 
