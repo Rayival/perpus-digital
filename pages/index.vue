@@ -1,18 +1,18 @@
 <template>
   <div class="intro" style="background-color:#23323D">
       <div class="text-center">
-          <h2>ISI BUKU</h2>
+          <h2>ISI BUKU KUNJUNGAN</h2>
           <div class="container-fluid">
-            <form class="py-3 m-5">
+            <form class="py-3 m-5" @submit.prevent="kirimData">
               <div class="row m-3 d-flex justify-content-center">
                 <div class="col-sm-7">
-                      <input type="text" style="box-shadow: 2px 2px 2px #424242;" class="form-control" placeholder="Nama ..." aria-label="Nama ..." />
+                      <input type="text" style="box-shadow: 2px 2px 2px #424242;" class="form-control" placeholder="Nama ..." aria-label="Nama ..." required/>
                     </div>
                   </div>
                 <div class="row m-3 justify-content-center">
                   <div class="col-sm-7">
-                      <select class="form-control form-control-lg form-select" style="box-shadow: 2px 2px 2px #424242;">
-                        <option value="">Kategori ...</option>
+                      <select class="form-control form-control-lg form-select" style="box-shadow: 2px 2px 2px #424242;" required>
+                        <option value="" disabled selected>Kategori ...</option>
                         <option>Siswa</option>
                         <option>Guru</option>
                         <option>Staf</option>
@@ -60,16 +60,20 @@
                               </select>
                           </div>
                       </div>
-                      <NuxtLink to="/pengunjung">
                           <input type="submit" class="btn btn-dark btn-lg rounded-5 px-5" value="Kirim">
-                      </NuxtLink>
                   </form>
               
           </div>
       </div>
   </div>
 </template>
+<script setup>
+// const supabase = useSupabaseClient()
 
+async function kirimData() {
+  navigateTo ('pengunjung/')
+}
+</script>
 <style scoped>
 .intro{
   height: 100vh;
