@@ -68,9 +68,21 @@
   </div>
 </template>
 <script setup>
-// const supabase = useSupabaseClient()
+const supabase = useSupabaseClient()
+
+const members = ref([])
+const objectives = ref([])
+
+const nama = ref('')
+const keanggotaan = ref('')
+const tingkat = ref('')
+const jurusan = ref('')
+const kelas = ref('')
+const waktu = ref('')
+const keperluan = ref('')
 
 async function kirimData() {
+  
   navigateTo ('pengunjung/')
 }
 </script>
