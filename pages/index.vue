@@ -6,23 +6,22 @@
             <form class="py-3 m-5" @submit.prevent="kirimData">
               <div class="row m-3 d-flex justify-content-center">
                 <div class="col-sm-7">
-                      <input type="text" style="box-shadow: 2px 2px 2px #424242;" class="form-control" placeholder="Nama ..." aria-label="Nama ..." required/>
+                      <input v-model="form.nama" type="text" style="box-shadow: 2px 2px 2px #424242;" class="form-control" placeholder="Nama ..." aria-label="Nama ..." required/>
                     </div>
                   </div>
+            <div class="mb-3">
                 <div class="row m-3 justify-content-center">
                   <div class="col-sm-7">
-                      <select class="form-control form-control-lg form-select" style="box-shadow: 2px 2px 2px #424242;" required>
+                      <select v-model="form.kategori" class="form-control form-control-lg form-select" style="box-shadow: 2px 2px 2px #424242;" required>
                         <option value="" disabled selected>Kategori ...</option>
-                        <option>Siswa</option>
-                        <option>Guru</option>
-                        <option>Staf</option>
-                        <option>Umum</option>
+                        <option v-for="(item,i) in members" :key="i" :value="item.id">{{ item.nama }}</option>
                       </select>
                   </div>
                 </div>
-                  <div class="row m-3 justify-content-center">
+            </div>
+                  <div class="row m-3 justify-content-center" v-if="form.kategori == '1'" @change="resetkelas">
                     <div class="col-sm-2 pb-2">
-                              <select class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
+                              <select v-model="form.tingkat" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
                                   <option value="">Tingkatan</option>
                                   <option value="X">X</option>
                                   <option value="XI">XI</option>
@@ -30,7 +29,7 @@
                               </select>
                           </div>
                           <div class="col-sm-3 justify-content-center pb-2">
-                              <select class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
+                              <select v-model="form.jurusan" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
                                   <option value="">Jurusan</option>
                                   <option value="TJKT">TJKT</option>
                                   <option value="TBSM">TBSM</option>
@@ -40,7 +39,7 @@
                               </select>
                           </div>
                           <div class="col-sm-2 justify-content-center">
-                              <select class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
+                              <select v-model="form.kelas" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
                                   <option value="">Kelas</option>
                                   <option value="1">1</option>
                                   <option value="2">2</option>
@@ -51,13 +50,10 @@
                       </div>
                       <div class="row m-3 justify-content-center">
                           <div class="col-sm-7">
-                              <select class="form-control mb-3" style="box-shadow: 2px 2px 2px #424242;">
-                                  <option value="">Keperluan ...</option>
-                                  <option>Membaca</option>
-                                  <option>Meminjam Buku</option>
-                                  <option>Berkunjung</option>
-                                  <option>Mengembalikan Buku</option>
-                              </select>
+                            <select v-model="form.keperluan"  class="form-control">
+                            <option value="" disabled>KEPERLUAN</option>
+                            <option v-for="(item,i) in objectives" :key="i" :value="item.id">{{ item.nama }}</option>
+                            </select>
                           </div>
                       </div>
                           <input type="submit" class="btn btn-dark btn-lg rounded-5 px-5" value="Kirim">
@@ -67,25 +63,50 @@
       </div>
   </div>
 </template>
+
 <script setup>
 const supabase = useSupabaseClient()
 
 const members = ref([])
 const objectives = ref([])
+const form = ref({
+  nama: '',
+  keanggotaan : '',
+  tingkat : '',
+  jurusan : '',
+  kelas : '',
+  waktu : '',
+  keperluan: ''
+})
 
-const nama = ref('')
-const keanggotaan = ref('')
-const tingkat = ref('')
-const jurusan = ref('')
-const kelas = ref('')
-const waktu = ref('')
-const keperluan = ref('')
-
-async function kirimData() {
-  
-  navigateTo ('pengunjung/')
+const kirimData = async () => {
+  console.log(form.value);
+  const { error } = await supabase.from('pengunjung').insert([form.value])
+  if(!error) navigateTo('pengunjung/')
 }
+const getKeanggotaan = async () => {
+  const { data, error } = await supabase.from('keanggotaan').select('*')
+  if(data) members.value = data
+}
+const getKeperluan = async () => {
+  const { data, error } = await supabase.from('keperluan').select('*')
+  if(data) objectives.value = data
+
+}
+const resetkelas = e => {
+  if(e.target.value === '2' || '3' || '4'){
+    form.value.tingkat = ''
+    form.value.jurusan = ''
+    form.value.kelas = ''
+  }
+}
+onMounted(() => {
+  getKeanggotaan()
+  getKeperluan()
+})
+
 </script>
+
 <style scoped>
 .intro{
   height: 100vh;
