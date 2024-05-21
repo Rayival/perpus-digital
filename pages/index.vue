@@ -1,81 +1,129 @@
 <template>
-<div class="content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-12">
-        <h2 class="text-center my-4">RIWAYAT KUNJUNGAN</h2>
-        <div class="my-3">
-        </div>
-        <div class="my-3 text-muted">menampilkan 1 dari </div>
-        <table class="table table-bordered border-dark text-white ">
-          <thead>
-              <tr class="text-center">
-                <td>ID</td>
-                <td>NAMA</td>
-                <td>KEANGGOTAAN</td>
-                <td>KELAS</td>
-                <td>KEPERLUAN</td>
-                <td>TANGGAL</td>
-                <td>JAM</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(visitors,i) in visitors" :key="i" class="text-center">
-                <td>{{ i+1 }}.</td>
-                <td>{{ visitors.nama }}</td>
-                <td>{{ visitors.keanggotaan.nama }}</td>
-                <td>{{ visitors.tingkat}}-{{ visitors.jurusan }}{{ visitors.kelas }}</td>
-                <td>{{ visitors.keperluan.nama }}</td>
-                <td>{{ visitors.tanggal }}</td>
-                <td>{{ visitors.jam.split(".")[0] }} </td>
-              </tr>
-            </tbody>
-        </table>
-        </div>
-        </div>
+  <div class="intro" style="background-color:#23323D">
+      <div class="text-center">
+          <h2>ISI BUKU KUNJUNGAN</h2>
+          <div class="container-fluid">
+            <form class="py-3 m-5" @submit.prevent="kirimData">
+              <div class="row m-3 d-flex justify-content-center">
+                <div class="col-sm-7">
+                      <input v-model="form.nama" type="text" style="box-shadow: 2px 2px 2px #424242;" class="form-control" placeholder="Nama ..." aria-label="Nama ..." required/>
+                    </div>
+                  </div>
+            <div class="mb-3">
+                <div class="row m-3 justify-content-center">
+                  <div class="col-sm-7">
+                      <select v-model="form.kategori" class="form-control form-control-lg form-select" style="box-shadow: 2px 2px 2px #424242;" required>
+                        <option value="" disabled selected>Kategori ...</option>
+                        <option v-for="(item,i) in members" :key="i" :value="item.id">{{ item.nama }}</option>
+                      </select>
+                  </div>
+                </div>
+            </div>
+                  <div class="row m-3 justify-content-center" v-if="form.kategori == '1'" @change="resetkelas">
+                    <div class="col-sm-2 pb-2">
+                              <select v-model="form.tingkat" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
+                                  <option value="">Tingkat</option>
+                                  <option value="X">X</option>
+                                  <option value="XI">XI</option>
+                                  <option value="XII">XII</option>
+                              </select>
+                          </div>
+                          <div class="col-sm-3 justify-content-center pb-2">
+                              <select v-model="form.jurusan" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
+                                  <option value="">Jurusan</option>
+                                  <option value="TJKT">TJKT</option>
+                                  <option value="TBSM">TBSM</option>
+                                  <option value="PPLG">PPLG</option>
+                                  <option value="DKV">DKV</option>
+                                  <option value="TOI">TOI</option>
+                              </select>
+                          </div>
+                          <div class="col-sm-2 justify-content-center">
+                              <select v-model="form.kelas" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
+                                  <option value="">Kelas</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="row m-3 justify-content-center">
+                          <div class="col-sm-7">
+                            <select v-model="form.keperluan"  class="form-control">
+                            <option value="" disabled>Keperluan</option>
+                            <option v-for="(item,i) in objectives" :key="i" :value="item.id">{{ item.nama }}</option>
+                            </select>
+                          </div>
+                      </div>
+                          <input type="submit" class="btn btn-dark btn-lg rounded-5 px-5" value="Kirim">
+                  </form>
+              
+          </div>
       </div>
-    </div>
-  
-  <!-- <button type="submit" class="btn btn-dark btn-lg rounded-5 px-5">Mencari Buku</button> -->
-  <nuxt-link to="/buku" class="btn btn-dark btn-lg rounded-5 px-5 mx-2">Mencari Buku</nuxt-link>
-
-  <!-- <button type="submit" class="btn btn-dark btn-lg rounded-5 px-5">Selesai</button> -->
-  <nuxt-link to="/" class="btn btn-dark btn-lg rounded-5 px-5">Selesai</nuxt-link>
+  </div>
 </template>
 
 <script setup>
-const supabase= useSupabaseClient()
+const supabase = useSupabaseClient()
 
-const visitors = ref([])
-const getPengunjung =async () => {
-  const { data, error } = await supabase.from('pengunjung').select(`*, keanggotaan(*), keperluan(*)`)
-  if(data) visitors.value = data
-}
-onMounted(() =>{
-  getPengunjung()
+const members = ref([])
+const objectives = ref([])
+const form = ref({
+  nama: '',
+  kategori : '',
+  tingkat : '',
+  jurusan : '',
+  kelas : '',
+  waktu : '',
+  keperluan: ''
 })
 
+const kirimData = async () => {
+  console.log(form.value);
+  const { error } = await supabase.from('pengunjung').insert([form.value])
+  if(!error) navigateTo('/pengunjung')
+}
+const getKeanggotaan = async () => {
+  const { data, error } = await supabase.from('keanggotaan').select('*')
+  if(data) members.value = data
+}
+const getKeperluan = async () => {
+  const { data, error } = await supabase.from('keperluan').select('*')
+  if(data) objectives.value = data
 
+}
+const resetkelas = e => {
+  if(e.target.value === '2' || '3' || '4'){
+    form.value.tingkat = ''
+    form.value.jurusan = ''
+    form.value.kelas = ''
+  }
+}
+onMounted(() => {
+  getKeanggotaan()
+  getKeperluan()
+})
 
 </script>
 
 <style scoped>
-.content {
-  background-image: url('@/assets/home.png');
-  background-size: cover;
+.intro{
   height: 100vh;
-  width: 100%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color:rgb(255, 255, 255);
 }
-.btn{
-  font-family: sans Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  float :right;
+.text-center{
+  padding-top: 5%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+  font-size: 190%;
+  color: rgb(255, 255, 255);
+  text-align: center;
 }
 
-thead, tbody, td{
-  border: 2px solid black;
+.btn{
+  background-color: white;
+
+  box-shadow: 2px 2px 2px #424242;
+  color: black;
+  
 }
-</style> 
+</style>
