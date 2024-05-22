@@ -6,22 +6,22 @@
             <form class="py-3 m-5" @submit.prevent="kirimData">
               <div class="row m-3 d-flex justify-content-center">
                 <div class="col-sm-7">
-                      <input v-model="form.nama" type="text" style="box-shadow: 2px 2px 2px #424242;" class="form-control" placeholder="Nama ..." aria-label="Nama ..." required/>
+                      <input v-model="nama" type="text" style="box-shadow: 2px 2px 2px #424242;" class="form-control" placeholder="Nama ..." aria-label="Nama ..." required/>
                     </div>
                   </div>
             <div class="mb-3">
                 <div class="row m-3 justify-content-center">
                   <div class="col-sm-7">
-                      <select v-model="form.kategori" class="form-control form-control-lg form-select" style="box-shadow: 2px 2px 2px #424242;" required>
+                      <select v-model="kategori" class="form-control form-control-lg form-select" style="box-shadow: 2px 2px 2px #424242;" required>
                         <option value="" disabled selected>Kategori ...</option>
                         <option v-for="(item,i) in members" :key="i" :value="item.id">{{ item.nama }}</option>
                       </select>
                   </div>
                 </div>
             </div>
-                  <div class="row m-3 justify-content-center" v-if="form.kategori == '1'" @change="resetkelas">
+                  <div class="row m-3 justify-content-center" v-if="kategori == '1'" @change="resetkelas">
                     <div class="col-sm-2 pb-2">
-                              <select v-model="form.tingkat" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
+                              <select v-model="tingkat" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
                                   <option value="">Tingkat</option>
                                   <option value="X">X</option>
                                   <option value="XI">XI</option>
@@ -29,7 +29,7 @@
                               </select>
                           </div>
                           <div class="col-sm-3 justify-content-center pb-2">
-                              <select v-model="form.jurusan" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
+                              <select v-model="jurusan" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
                                   <option value="">Jurusan</option>
                                   <option value="TJKT">TJKT</option>
                                   <option value="TBSM">TBSM</option>
@@ -39,7 +39,7 @@
                               </select>
                           </div>
                           <div class="col-sm-2 justify-content-center">
-                              <select v-model="form.kelas" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
+                              <select v-model="kelas" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
                                   <option value="">Kelas</option>
                                   <option value="1">1</option>
                                   <option value="2">2</option>
@@ -50,7 +50,7 @@
                       </div>
                       <div class="row m-3 justify-content-center">
                           <div class="col-sm-7">
-                            <select v-model="form.keperluan"  class="form-control">
+                            <select v-model="keperluan"  class="form-control">
                             <option value="" disabled>Keperluan</option>
                             <option v-for="(item,i) in objectives" :key="i" :value="item.id">{{ item.nama }}</option>
                             </select>
@@ -69,20 +69,36 @@ const supabase = useSupabaseClient()
 
 const members = ref([])
 const objectives = ref([])
-const form = ref({
-  nama: '',
-  kategori : '',
-  tingkat : '',
-  jurusan : '',
-  kelas : '',
-  waktu : '',
-  keperluan: ''
-})
+// const form = ref({
+//   nama: '',
+//   kategori : '',
+//   tingkat : '',
+//   jurusan : '',
+//   kelas : '',
+//   waktu : '',
+//   keperluan: ''
+// })
 
+const nama = ref('')
+const kategori = ref('')
+const kelas = ref('')
+const jurusan = ref('')
+const tingkat = ref('')
+const keperluan = ref('')
+// const kelasLengkap = ref('')
 const kirimData = async () => {
-  console.log(form.value);
-  const { error } = await supabase.from('pengunjung').insert([form.value])
-  if(!error) navigateTo('/pengunjung')
+  // console.log(form.value);
+  // kelasLengkap.value = `${tingkat.value} ${jurusan.value} ${kelas.value}`
+  const { error } = await supabase.from('pengunjung').insert([{
+    kategori: kategori.value,
+    kelas: kelas.value,
+    tingkat: tingkat.value,
+    jurusan: jurusan.value,
+    nama: nama.value,
+    keperluan: keperluan.value
+  }])
+  if (error) throw error
+  else navigateTo('/pengunjung/')
 }
 const getKeanggotaan = async () => {
   const { data, error } = await supabase.from('keanggotaan').select('*')
@@ -93,12 +109,12 @@ const getKeperluan = async () => {
   if(data) objectives.value = data
 
 }
-const resetkelas = e => {
-  if(e.target.value === '2' || '3' || '4'){
-    form.value.tingkat = ''
-    form.value.jurusan = ''
-    form.value.kelas = ''
-  }
+function resetKelas(e){
+    if(e.target.value != '2'){
+        kelas.value= ''
+        tingkat.value= ''
+        jurusan.value= ''
+    }
 }
 onMounted(() => {
   getKeanggotaan()
