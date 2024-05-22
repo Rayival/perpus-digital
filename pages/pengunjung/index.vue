@@ -4,10 +4,7 @@
     <div class="row">
       <div class="col-lg-12">
         <h2 class="text-center my-4">RIWAYAT KUNJUNGAN</h2>
-        <div class="my-3">
-          <input type="search" class="form-control form-control-lg rounded-5" placeholder="Filter...">
-        </div>
-        <div class="my-3 text-muted">menampilkan 1 dari </div>
+        <div class="my-3 text-muted">menampilkan {{ visitors.length }}</div>
         <table class="table table-bordered border-dark text-white ">
           <thead>
               <tr class="text-center">
@@ -21,43 +18,46 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(visitors,i) in visitors" :key="i" class="text-center">
+              <tr v-for="(visitor,i) in visitors" :key="i" class="text-center">
                 <td>{{ i+1 }}.</td>
-                <td>{{ visitors.nama }}</td>
-                <td>{{ visitors.keanggotaan.nama }}</td>
-                <td>{{ visitors.tingkat}}-{{ visitors.jurusan }}{{ visitors.kelas }}</td>
-                <td>{{ visitors.keperluan.nama }}</td>
-                <td>{{ visitors.tanggal }}</td>
-                <td>{{ visitors.jam.split(".")[0] }} </td>
+                <td>{{ visitor.nama }}</td>
+                <td>{{ visitor.keanggotaan.nama }}</td>
+                <td>{{ visitor.tingkat}}-{{ visitor.jurusan }}{{ visitor.kelas }}</td>
+                <td>{{ visitor.keperluan.nama }}</td>
+                <td>{{ visitor.tanggal }}</td>
+                <td>{{ visitor.waktu.split(".")[0] }} </td>
               </tr>
             </tbody>
         </table>
         </div>
+        <div class="row d-flex justify-content-end">
+          <nuxt-link to="/buku" class="col-lg-3 col-2 btn btn-dark btn-lg rounded-5 px-5 mx-2">Mencari Buku</nuxt-link>
+          
+          <nuxt-link to="/" class="col-lg-3 col-2 btn btn-dark btn-lg rounded-5 px-5">Selesai</nuxt-link>
+        </div>
+      
+        <!-- <button type="submit" class="btn btn-dark btn-lg rounded-5 px-5">Selesai</button> -->
         </div>
       </div>
     </div>
   
   <!-- <button type="submit" class="btn btn-dark btn-lg rounded-5 px-5">Mencari Buku</button> -->
-  <nuxt-link to="/buku" class="btn btn-dark btn-lg rounded-5 px-5 mx-2">Mencari Buku</nuxt-link>
-
-  <!-- <button type="submit" class="btn btn-dark btn-lg rounded-5 px-5">Selesai</button> -->
-  <nuxt-link to="/" class="btn btn-dark btn-lg rounded-5 px-5">Selesai</nuxt-link>
 </template>
 
 <script setup>
 const supabase= useSupabaseClient()
 
 const visitors = ref([])
-const getPengunjung =async () => {
+
+const getPengunjung = async () => {
   const { data, error } = await supabase.from('pengunjung').select(`*, keanggotaan(*), keperluan(*)`)
   if(data) visitors.value = data
 }
-onMounted(() =>{
-  getPengunjung()
+
+
+onMounted(() => {
+    getPengunjung()
 })
-
-
-
 </script>
 
 <style scoped>
