@@ -6,7 +6,7 @@
               <div class="col-3">
                   <img :src="buku?.cover" class="cover border" alt="cover" style="width: 200px;">
               </div>
-              <div class="col-8">
+              <div class="col-8 card rounded-5 text-dark text-center" style="width: 30rem; height: 20rem; padding-top: 50px; margin-top: 30px;">
                   <div class="row">
                       <h1>{{ buku?.judul }}</h1>
                   </div>
@@ -56,12 +56,14 @@ onMounted(() => {
 
 <style scoped>
 .content {
-  background-image: url('@/assets/bg-home-cari-buku.jpg');
-  background-size: cover;
+  /* background-image: url('@/assets/bg-home-cari-buku.jpg'); */
+  background-color: #23323d;
+  /* background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    width: 100%;
+    width: 100%; */
+    height: 100vh;
     
   
     font-family: 'Jockey One';
