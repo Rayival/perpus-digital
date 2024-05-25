@@ -56,13 +56,7 @@ onMounted(() => {
 
 <style scoped>
 .content {
-  /* background-image: url('@/assets/bg-home-cari-buku.jpg'); */
   background-color: #23323d;
-  /* background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    width: 100%; */
     height: 100vh;
     
   
@@ -70,8 +64,6 @@ onMounted(() => {
 }
 .btn  {
     background-color: #fffeee;
-    /* padding: 0 30px;
-    margin: 0 100px 0; */
 }
 
 .form-control{
