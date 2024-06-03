@@ -126,6 +126,7 @@ onMounted(() => {
 <style scoped>
 .intro{
   height: 100vh;
+  padding-top: 15%;
 }
 .text-center{
   padding-top: 5%;
