@@ -1,10 +1,11 @@
 <template>
-<div class="content">
-  <div class="container-fluid">
+<div class="wrapper">
+  <div class="content"></div>
+  <div class="container-fluid text-white" style="padding-top: 160px;">
     <div class="row">
-      <div class="col-lg-12">
-        <h2 class="text-center my-4">RIWAYAT KUNJUNGAN</h2>
-        <div class="my-3 text-muted">menampilkan {{ visitors.length }}</div>
+      <div class="col-lg-12 ">
+        <h2 class="text-center my-4 ">RIWAYAT KUNJUNGAN</h2>
+        <div class="my-3">menampilkan {{ visitors.length }} dari {{ amountVisitors}}</div>
         <div class="table table-responsive">
           <table class="table table-bordered border-dark text-white ">
             <thead>
@@ -33,9 +34,9 @@
         </div>
         </div>
         <div class="row d-flex justify-content-end text-center">
-          <nuxt-link to="/buku" class="col-lg-3 col-2 btn btn-dark btn-lg rounded-5 px-5 mx-2">Mencari Buku</nuxt-link>
+          <nuxt-link to="/buku" class="col-lg-3 col-4 btn btn-dark btn-lg rounded-5 ">Mencari Buku</nuxt-link>
           
-          <nuxt-link to="/" class="col-lg-3 col-2 btn btn-dark btn-lg rounded-5 px-5 mx-2">Selesai</nuxt-link>
+          <nuxt-link to="/" class="col-lg-3 col-4 btn btn-dark btn-lg rounded-5 ">Selesai</nuxt-link>
         </div>
       
         <!-- <button type="submit" class="btn btn-dark btn-lg rounded-5 px-5">Selesai</button> -->
@@ -50,27 +51,40 @@
 const supabase= useSupabaseClient()
 
 const visitors = ref([])
+const amountVisitors = ref(0)
 
 const getPengunjung = async () => {
   const { data, error } = await supabase.from('pengunjung').select(`*, keanggotaan(*), keperluan(*)`)
   if(data) visitors.value = data
 }
 
+async function getAmountVisitors()
+{
+    const {data , count} = await supabase.from('pengunjung')
+    .select('*', { count: "exact"})
+    if (data) amountVisitors.value = count
+}
 
 onMounted(() => {
     getPengunjung()
+    getAmountVisitors()
 })
 </script>
 
 <style scoped>
+
 .content {
   background-image: url('@/assets/home.png');
-  background-size: cover;
-  height: 100vh;
-  width: 100%;
-  padding-top: 15%;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color:rgb(255, 255, 255);
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: -1;
 }
 .btn{
   font-family: sans Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
