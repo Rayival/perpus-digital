@@ -1,6 +1,6 @@
 <template>
   <div class="intro" style="background-color:#23323D">
-      <div class="text-center">
+      <div class="text-center" style="padding-top: 100px;">
           <h2>ISI BUKU KUNJUNGAN</h2>
           <div class="container-fluid">
             <form class="py-3 m-5" @submit.prevent="kirimData">
@@ -21,7 +21,7 @@
             </div>
                   <div class="row m-3 justify-content-center" v-if="kategori == '1'" @change="resetkelas">
                     <div class="col-sm-2 pb-2">
-                              <select v-model="tingkat" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
+                              <select v-model="tingkat" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;" required>
                                   <option value="">Tingkat</option>
                                   <option value="X">X</option>
                                   <option value="XI">XI</option>
@@ -29,7 +29,7 @@
                               </select>
                           </div>
                           <div class="col-sm-3 justify-content-center pb-2">
-                              <select v-model="jurusan" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
+                              <select v-model="jurusan" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;" required>
                                   <option value="">Jurusan</option>
                                   <option value="TJKT">TJKT</option>
                                   <option value="TBSM">TBSM</option>
@@ -39,7 +39,7 @@
                               </select>
                           </div>
                           <div class="col-sm-2 justify-content-center">
-                              <select v-model="kelas" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;">
+                              <select v-model="kelas" class="form-select" aria-label="Disabled select example" style="box-shadow: 2px 2px 2px #424242;" required>
                                   <option value="">Kelas</option>
                                   <option value="1">1</option>
                                   <option value="2">2</option>
