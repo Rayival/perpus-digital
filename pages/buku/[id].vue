@@ -14,7 +14,7 @@
                         <h4>Pengarang : {{ buku?.penulis }}</h4>
                         <h4>Penerbit : {{ buku?.penerbit }}</h4>
                         <h4>Tahun Terbit : {{ buku?.tahun_terbit }}</h4>
-                        <h4>Genre : {{ buku?.genre }}</h4>
+                        <h4>Kategori : {{ buku?.kategori_buku?.nama }}</h4>
                     </div>
                     <div class="row">
                         <h6>{{ buku?.deskripsi }}.</h6>
