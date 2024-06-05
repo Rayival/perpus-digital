@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
     <div class="content"></div>
-        <div class="container-fluid">
+        <div class="container-fluid" style="padding-top: 100px;">
                 <form @submit.prevent="getBooks" class="row pt-5 d-flex justify-content-center">
                     <div class="col-lg-10">
                         <input v-model="keyword" type="search" class="form-control form-control-md rounded-5" name="cari-buku" id="cari-buku" placeholder="Mau baca apa hari ini?" autocomplete="off">
