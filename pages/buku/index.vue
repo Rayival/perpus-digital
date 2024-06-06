@@ -8,7 +8,7 @@
                     </div>
                 </form>
                 <div class="row my-3 d-flex justify-content-center ps-0">
-                    <p class="col-5 m-0 pt-2 text-white" style="letter-spacing: 3px;">Menampilkan {{ books.length }} buku</p>
+                    <p class="col-5 m-0 pt-2 text-white" style="letter-spacing: 3px;">Menampilkan {{ books.length }} dari {{ amountBooks }}buku</p>
                     <p class="col-2 text-white m-0 text-end mt-2" style="letter-spacing: 3px;">kategori :</p>
                     <div class="col-3">
                         <select v-model="keyword" name="kategori" id="kategori" class="form-control form-control-sm rounded-5 form-select">
@@ -43,6 +43,7 @@ const books = ref([])
 const kategories = ref([])
 const keyword = ref('')
 const kategori = ref('')
+const amountBooks = ref(0)
 
 async function getBooks() {
     const {data, error} = await supabase.from('buku' )
@@ -75,10 +76,17 @@ const bookFiltered = computed (() => {
     })
 }) 
 
+async function getJumlahBuku()
+{
+    const {data , count} = await supabase.from('buku')
+    .select('*', { count: "exact"})
+    if (data) amountBooks.value = count
+}
 
 onMounted(() => {
     getBooks()
     getKategori()
+    getJumlahBuku()
 })
 </script>
 
