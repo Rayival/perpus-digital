@@ -1,6 +1,6 @@
 <template>
   <div class="intro" style="background-color:#23323D">
-      <div class="text-center" style="padding-top: 100px;">
+      <div class="text-center" style="padding-top: 190px;">
           <h2>ISI BUKU KUNJUNGAN</h2>
           <div class="container-fluid">
             <form class="py-3 m-5" @submit.prevent="kirimData">
@@ -126,7 +126,7 @@ onMounted(() => {
 <style scoped>
 .intro{
   height: 100vh;
-  padding-top: 15%;
+  /* padding-bottom: 10%; */
 }
 .text-center{
   padding-top: 5%;
